@@ -1,0 +1,16 @@
+#ifndef CBERSPLUGINCORE_GLOBAL_H
+#define CBERSPLUGINCORE_GLOBAL_H
+
+#include <QtCore/qglobal.h>
+
+#if defined(CBERSPLUGINCORE_LIBRARY)
+#  define CBERSPLUGINCORESHARED_EXPORT Q_DECL_EXPORT
+#else
+#  define CBERSPLUGINCORESHARED_EXPORT Q_DECL_IMPORT
+#endif
+
+#define BEGIN_NAMESPACE_CBERSPLUGINS  namespace Cbers { namespace Plugins {
+#define END_NAMESPACE_CBERSPLUGINS   } }
+#define USING_NAMESPACE_CBERSPLUGINS  using namespace Cbers::Plugins;
+
+#endif // CBERSPLUGINCORE_GLOBAL_H

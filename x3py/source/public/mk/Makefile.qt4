@@ -1,0 +1,110 @@
+# Included by Makefile of QT project.
+# x3py framework: https://github.com/rhcad/x3py
+
+ifdef APPTYPE
+TARGET   =$(INSTALL_DIR)/$(PROJNAME)$(APPEXT)
+else
+TARGET   =$(PLUGINS_DIR)/$(PROJNAME).pln
+endif
+OBJDIR   =._qt
+SOURCES  =$(wildcard *.cpp)
+OBJS     =$(addprefix $(OBJDIR)/, $(SOURCES:.cpp=$(OBJEXT)))
+
+ifndef QT4_INCLUDE
+ifdef QTDIR
+QT4_INCLUDE =$(QTDIR)/include
+QT4_LIB     =$(QTDIR)/lib
+QT4_BIN     =$(QTDIR)/bin/
+endif
+endif
+
+ifdef QT4_INCLUDE
+
+INCLUDES += -I"$(QT4_INCLUDE)" \
+            -I"$(QT4_INCLUDE)/QtCore" \
+            -I"$(QT4_INCLUDE)/QtGui" \
+            -I"$(QT4_INCLUDE)/QtWidgets" \
+            -I"$(QT4_INCLUDE)/qtmain" \
+            -I"$(OBJDIR)" \
+            -DQT_CORE_LIB -DQT_GUI_LIB
+
+ifdef VCBIN
+RCFILES   =$(wildcard *.rc)
+RESFILES  =$(addprefix $(OBJDIR)/, $(RCFILES:.rc=.res))
+endif
+
+ifdef IS_WIN
+QTLIB_EXT =4$(LIBEND)
+else
+QTLIB_EXT =$(LIBEND)
+endif
+
+ifdef IS_MACOSX
+LIBS     += -F$(QT4_LIB) \
+            -framework QtCore \
+            -framework QtGui \
+            -framework QtWidgets \
+            -Wl,-rpath,$(QT4_LIB)
+else
+LIBS     += $(LIBPATHFLAG)"$(QT4_LIB)" \
+            $(LIBFLAG)QtCore$(QTLIB_EXT) \
+            $(LIBFLAG)QtGui$(QTLIB_EXT)
+endif
+ifdef IS_WIN
+LIBS     += $(LIBFLAG)qtmain$(LIBEND)
+endif
+
+UIFILES   =$(wildcard *.ui)
+UIHFILES  =$(addprefix $(OBJDIR)/ui_, $(UIFILES:.ui=.h))
+QRCFILES  =$(wildcard *.qrc)
+QRCCPPS   =$(addprefix $(OBJDIR)/qrc_, $(QRCFILES:.qrc=.cpp))
+
+all:       $(TARGET)
+$(TARGET): $(OBJS) $(RESFILES)
+	$(LINK) $(LDFLAGS) $(OUTFLAG)$@ $(OBJS) $(LIBS) $(RESFILES)
+
+%.d: %.cpp
+	$(DEPEND_CC) $@ $(INCLUDES) $<
+
+$(OBJDIR)/%$(OBJEXT): %.cpp
+	-@test -d $(OBJDIR) || mkdir $(OBJDIR)
+	$(CPP) $(CPPFLAGS) $(INCLUDES) $(OFLAG)$@ -c $<
+
+$(MOCS:.h=.d): %.d: %.cpp $(OBJDIR)/moc_%.cpp $(UIHFILES) $(QRCCPPS)
+	$(DEPEND_CC) $@ $(INCLUDES) $<
+
+$(OBJDIR)/ui_%.h: %.ui
+	-@test -d $(OBJDIR) || mkdir $(OBJDIR)
+	"$(QT4_BIN)uic" -o $@ $<
+
+$(OBJDIR)/qrc_%.cpp: %.qrc
+	-@test -d $(OBJDIR) || mkdir $(OBJDIR)
+	"$(QT4_BIN)rcc" -name $(basename $<) -no-compress $< -o $@
+
+$(OBJDIR)/moc_%.cpp: %.h
+	-@test -d $(OBJDIR) || mkdir $(OBJDIR)
+	"$(QT4_BIN)moc" $< -o $@ $(INCLUDES)
+
+$(OBJDIR)/%.res: %.rc
+	-@test -d $(OBJDIR) || mkdir $(OBJDIR)
+	"$(WINSDKBIN)rc" -Fo$@ $(INCLUDES) $(WINSDKINC) $<
+
+ifndef clean
+include $(SOURCES:.cpp=.d)
+endif
+
+else
+all:
+	@echo QT4_INCLUDE not defined.
+endif #QT4_INCLUDE
+
+clean:
+ifndef SWIG_TYPE
+	rm -rf *.d *.o *.obj *_wrap.*  ._*
+ifdef cleanall
+	rm -rf $(TARGET)
+endif
+ifdef touch
+	touch -c *
+endif
+endif

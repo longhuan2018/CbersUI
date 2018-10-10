@@ -1,0 +1,26 @@
+<RCC>
+    <qresource prefix="/office2007">
+        <file>Resource/office2007_blue/office2007_blue.qss</file>
+        <file>Resource/office2007_blue/AppCaption/SysBtn_Close.png</file>
+        <file>Resource/office2007_blue/AppCaption/SysBtn_Maximize.png</file>
+        <file>Resource/office2007_blue/AppCaption/SysBtn_Minimize.png</file>
+        <file>Resource/office2007_blue/AppCaption/SysBtn_Restore.png</file>
+        <file>Resource/office2007_blue/AppCaption/Btn_HideElements.png</file>
+        <file>Resource/office2007_blue/AppCaption/Btn_ShowElements.png</file>
+        <file>Resource/office2007_black/AppCaption/Btn_HideElements.png</file>
+        <file>Resource/office2007_black/AppCaption/Btn_ShowElements.png</file>
+        <file>Resource/office2007_black/AppCaption/SysBtn_Close.png</file>
+        <file>Resource/office2007_black/AppCaption/SysBtn_Maximize.png</file>
+        <file>Resource/office2007_black/AppCaption/SysBtn_Minimize.png</file>
+        <file>Resource/office2007_black/AppCaption/SysBtn_Restore.png</file>
+        <file>Resource/office2007_black/office2007_black.qss</file>
+        <file>Resource/office2007_black/Black/caret-down_ffffff_14.png</file>
+        <file>Resource/office2007_black/Black/caret-right_ffffff_14.png</file>
+        <file>Resource/office2007_black/Black/check.png</file>
+        <file>Resource/office2007_black/Black/cross.svg</file>
+        <file>Resource/office2007_black/Black/down_arrow.png</file>
+        <file>Resource/office2007_black/Black/eye.svg</file>
+        <file>Resource/office2007_black/Black/eye-blocked.svg</file>
+        <file>Resource/office2007_black/Black/up_arrow.png</file>
+    </qresource>
+</RCC>

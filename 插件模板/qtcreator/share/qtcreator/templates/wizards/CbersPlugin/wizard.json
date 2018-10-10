@@ -1,0 +1,45 @@
+{
+    "version": 1,
+    "supportedProjectTypes": [ "Qbs.QbsProject", "Qt4ProjectManager.Qt4Project" ],
+    "id": "CbersPluginProject",
+    "category": "G.Library",
+    "trDescription": "Creates a custom SPD plugin.",
+    "trDisplayName": "CbersPlugin Project",
+    "trDisplayCategory": "Library",
+    "icon": "lib.png",
+	"featuresRequired": [ "QtSupport.Wizards.FeatureDesktop" ],
+
+    "pages":
+    [
+        {
+            "trDisplayName": "Project Location",
+            "trShortTitle": "Location",
+            "typeId": "Project",
+            "data": { "trDescription": "This wizard creates an empty CbersPlugin Project .pro file." }
+        },
+        {
+            "trDisplayName": "Project Management",
+            "trShortTitle": "Summary",
+            "typeId": "Summary"
+        }
+    ],
+    "generators":
+    [
+        {
+            "typeId": "File",
+            "data":
+            [
+                {
+                    "source": "project.pro",
+                    "target": "%{ProjectName}.pro",
+                    "openAsProject": true
+                },
+                {
+                    "source": "module.cpp",
+                    "target": "module.cpp",
+                    "openInEditor": true
+                }
+            ]
+        }
+    ]
+}

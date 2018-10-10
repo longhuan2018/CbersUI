@@ -1,0 +1,226 @@
+﻿{
+    "version": 1,
+    "supportedProjectTypes": [ ],
+    "id": "CbersPluginClass",
+    "category": "O.C++",
+    "trDescription": "Creates a CbersPlugin Class header and a source file for a new class that you can add to a CbersPlugin project.",
+    "trDisplayName": "CbersPlugin Class",
+    "trDisplayCategory": "C++",
+    "enabled": "%{JS: [ %{Plugins} ].indexOf('CppEditor') >= 0}",
+
+    "options":
+    [
+        { "key": "TargetPath", "value": "%{Path}" },
+        { "key": "HdrPath", "value": "%{Path}/%{HdrFileName}" },
+        { "key": "SrcPath", "value": "%{Path}/%{SrcFileName}" },
+        { "key": "CN", "value": "%{JS: Cpp.className('%{Class}')}" },
+        { "key": "Base", "value": "%{JS: ( '%{BaseCB}' === '' ) ? '%{BaseEdit}' : '%{BaseCB}'}" },
+        { "key": "isQObject", "value": "%{JS: [ 'QObject', 'QWidget', 'QDockWidget', 'QMainWindow', 'QTableWidget' ].indexOf('%{Base}') >= 0 }" },
+        { "key": "GUARD", "value": "%{JS: Cpp.headerGuard('%{HdrFileName}')}" }
+    ],
+
+    "pages":
+    [
+        {
+            "trDisplayName": "Define Class",
+            "trShortTitle": "Details",
+            "typeId": "Fields",
+            "data" :
+            [
+                {
+                    "name": "Class",
+                    "trDisplayName": "Class name:",
+                    "mandatory": true,
+                    "type": "LineEdit",
+                    "data": { "validator": "(?:(?:[a-zA-Z_][a-zA-Z_0-9]*::)*[a-zA-Z_][a-zA-Z_0-9]*|)" }
+                },
+				{
+                    "name": "BaseCB",
+                    "trDisplayName": "Base class:",
+                    "type": "ComboBox",
+                    "data":
+                    {
+                        "items": [ { "trKey": "<Custom>", "value": "" },
+                                   "QObject", "QWidget", "QDockWidget", "QMainWindow", "QTableWidget" ],
+						"index": 1
+
+                    }
+                },
+                {
+                    "name": "BaseEdit",
+                    "type": "LineEdit",
+                    "enabled": "%{JS: '%{BaseCB}' === ''}",
+                    "mandatory": false,
+                    "data":
+                    {
+                        "trText": "%{BaseCB}",
+                        "trDisabledText": "%{BaseCB}"
+                    }
+                },
+				{
+                    "name": "Sp2",
+                    "type": "Spacer",
+                    "data": { "size": 12 }
+                },
+                {
+                    "name": "PluginName",
+                    "trDisplayName": "插件名称:",
+                    "mandatory": true,
+                    "type": "LineEdit",
+					"data": { "trText": "%{JS: '%{Class}'}" }
+                },
+				{
+                    "name": "PluginCaption",
+                    "trDisplayName": "标题:",
+                    "mandatory": true,
+                    "type": "LineEdit",
+					"data": { "trText": "%{JS: '%{PluginName}'}" }
+                },
+				{
+                    "name": "PluginCategory",
+                    "trDisplayName": "分类:",
+                    "mandatory": true,
+                    "type": "LineEdit",
+					"data": { "trText": "Plugins" }
+                },
+				{
+                    "name": "PluginTooltip",
+                    "trDisplayName": "提示:",
+                    "mandatory": true,
+                    "type": "LineEdit",
+					"data": { "trText": "%{JS: '%{PluginName}'}" }
+                },
+				{
+                    "name": "PluginDescription",
+                    "trDisplayName": "描述:",
+                    "mandatory": true,
+                    "type": "LineEdit",
+					"data": { "trText": "%{JS: '%{PluginName}'}" }
+                },
+				{
+                    "name": "PluginBitmapName",
+                    "trDisplayName": "图标:",
+                    "mandatory": true,
+                    "type": "LineEdit",
+					"data": { "trText": "%{JS: '%{Class}'}" }
+                },
+				{
+                    "name": "IncludeIUIView",
+                    "trDisplayName": "视图插件",
+                    "type": "CheckBox",
+                    "data":
+                    {
+                        "checkedValue": "IUIView",
+                        "uncheckedValue": "",
+                        "checked": false
+                    }
+                },
+				{
+                    "name": "IncludeIUICommand",
+                    "trDisplayName": "命令按钮",
+                    "type": "CheckBox",
+					"enabled": "%{JS: '%{IncludeIUIView}' === ''}",					
+                    "data":
+                    {
+                        "checkedValue": "IUICommand",
+                        "uncheckedValue": "",						
+                        "checked": true
+                    }
+                },
+				{
+                    "name": "IncludeIUITool",
+                    "trDisplayName": "工具按钮",
+                    "type": "CheckBox",
+					"enabled": "%{JS: '%{IncludeIUIView}' === ''}",
+                    "data":
+                    {
+                        "checkedValue": "IUITool",
+                        "uncheckedValue": "",						
+                        "checked": false
+                    }
+                },
+				{
+                    "name": "IncludeIUIEvent",
+                    "trDisplayName": "是否监听插件消息",
+                    "type": "CheckBox",
+                    "data":
+                    {
+                        "checkedValue": "IUIEvent",
+                        "uncheckedValue": "",
+                        "checked": true
+                    }
+                },
+                {
+                    "name": "Sp2",
+                    "type": "Spacer",
+                    "data": { "size": 12 }
+                },
+                {
+                    "name": "HdrFileName",
+                    "type": "LineEdit",
+                    "trDisplayName": "Header file:",
+                    "mandatory": true,
+                    "data": { "trText": "%{JS: Cpp.classToFileName('%{Class}', '%{JS: Util.preferredSuffix('text/x-c++hdr')}')}" }
+                },
+                {
+                    "name": "SrcFileName",
+                    "type": "LineEdit",
+                    "trDisplayName": "Source file:",
+                    "mandatory": true,
+                    "data": { "trText": "%{JS: Cpp.classToFileName('%{Class}', '%{JS: Util.preferredSuffix('text/x-c++src')}')}" }
+                },
+                {
+                    "name": "Path",
+                    "type": "PathChooser",
+                    "trDisplayName": "Path:",
+                    "mandatory": true,
+                    "data":
+                    {
+                        "kind": "existingDirectory",
+                        "basePath": "%{InitialPath}",
+                        "path": "%{InitialPath}"
+                    }
+                }
+            ]
+        },
+        {
+            "trDisplayName": "Project Management",
+            "trShortTitle": "Summary",
+            "typeId": "Summary"
+        }
+    ],
+
+    "generators":
+    [
+        {
+            "typeId": "File",
+            "data":
+            [
+                {
+                    "source": "file.h",
+                    "target": "%{HdrPath}",
+                    "openInEditor": true,
+                    "options": [
+                        { "key": "Cpp:License:FileName", "value": "%{HdrFileName}" },
+                        { "key": "Cpp:License:ClassName", "value": "%{CN}" }
+                    ]
+                },
+                {
+                    "source": "file.cpp",
+                    "target": "%{SrcPath}",
+                    "openInEditor": true,
+                    "options": [
+                        { "key": "Cpp:License:FileName", "value": "%{SrcFileName}" },
+                        { "key": "Cpp:License:ClassName", "value": "%{CN}" }
+                    ]
+                },
+				{
+                    "source": "file.png",
+                    "target": "%{TargetPath}/%{PluginBitmapName}.png",
+                    "openInEditor": false,
+					"isBinary": true
+                }
+            ]
+        }
+    ]
+}

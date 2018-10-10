@@ -1,0 +1,125 @@
+﻿QMainWindow#QRibbonMainWindow{
+        background-color: #BEDAFE;
+        border: 1px solid rgba(24, 131, 215, 255);
+    min-width: 100%;
+}
+QWidget#QRibbonTitleWidget {
+    background-color: #ffffff;
+}
+
+QPushButton#Btn_ShowElements {border-image: url(:/office2007/Resource/office2007_blue/AppCaption/Btn_ShowElements.png);}
+QPushButton#Btn_HideElements {border-image: url(:/office2007/Resource/office2007_blue/AppCaption/Btn_HideElements.png);}
+QPushButton#SysBtn_Minimize {border-image: url(:/office2007/Resource/office2007_blue/AppCaption/SysBtn_Minimize.png);}
+QPushButton#SysBtn_Minimize:hover {background-color: rgba(229, 229, 229, 255);}
+QPushButton#SysBtn_Minimize:pressed {background-color: rgba(202, 202, 202, 255);}
+QPushButton#SysBtn_Restore {border-image: url(:/office2007/Resource/office2007_blue/AppCaption/SysBtn_Restore.png);}
+QPushButton#SysBtn_Restore:hover {background-color: rgba(229, 229, 229, 255);}
+QPushButton#SysBtn_Restore:pressed {background-color: rgba(202, 202, 202, 255);}
+QPushButton#SysBtn_Maximize {border-image: url(:/office2007/Resource/office2007_blue/AppCaption/SysBtn_Maximize.png);}
+QPushButton#SysBtn_Maximize:hover {background-color: rgba(229, 229, 229, 255);}
+QPushButton#SysBtn_Maximize:pressed {background-color: rgba(202, 202, 202, 255);}
+QPushButton#SysBtn_Close {border-image: url(:/office2007/Resource/office2007_blue/AppCaption/SysBtn_Close.png);}
+QPushButton#SysBtn_Close:hover {background-color: rgba(232, 17, 35, 255);}
+QPushButton#SysBtn_Close:pressed {background-color: rgba(241, 112, 122, 255);}
+
+QTabWidget#QRibbonTabWidget::pane {
+    background-color: qlineargradient(spread:pad, x1:0, y1:0, x2:0, y2:1, stop:0 rgba(216, 229, 247, 255), stop:0.2 rgba(204, 220, 242, 255), stop:0.8 rgba(178, 202, 234, 255), stop:1 rgba(207, 224, 245, 255));
+    border: 1px solid #90B5E4;
+    border-radius: 5px;
+    padding: 1px;
+}
+QTabWidget#QRibbonTabWidget {
+    background-color: #BEDAFE;
+    min-width: 100%;
+    left: 0px;
+    right: 0px;
+}
+QTabWidget#QRibbonTabWidget::tab-bar {
+    left: 5px;
+    right: 5px;
+    background-color: #BEDAFE;
+    min-width: 100%;
+}
+QTabWidget#QRibbonTabWidget QTabBar::tab {
+    margin-top: 5px;
+    min-width: 55px;
+    background-color: #BEDAFE;
+    height: 25px;
+    border: 1px solid #BEDAFE;
+    color: #4B7CB4;
+    border-bottom: 0px solid #BEDAFE;
+    margin-left: 2px;
+    margin-right: 2px;
+}
+QTabWidget#QRibbonTabWidget QTabBar::tab:!selected{
+    border: 0px;
+    background-color: transparent;    
+}
+QTabWidget#QRibbonTabWidget QTabBar::tab:selected{
+    border: 1px solid #90B5E4;
+    background-color: qlineargradient(spread:pad, x1:0, y1:0, x2:0, y2:1, stop:0 rgba(255, 255, 255, 255), stop:0.1 rgba(239, 244, 251, 255), stop:1 rgba(231, 239, 249, 255));
+    border-bottom: 1px solid #E1EAF5;
+    border-top-left-radius: 4px;
+    border-top-right-radius: 4px;
+    color: #4B7CB4;
+}
+QTabWidget#QRibbonTabWidget QTabBar::tab:hover{
+    border: 1px solid #99BBE8;
+    background-color: qradialgradient(spread:pad, cx:0.5, cy:0.5, radius:0.75, fx:0.5, fy:-0.5, stop:0 #BEDAFE, stop:0.5 #BEDAFE, stop:1 rgba(255, 197, 115, 168));
+    border-top-left-radius: 4px;
+    border-top-right-radius: 4px;
+    color: #4B7CB4;
+    border-bottom: 0px solid rgba(255, 197, 115, 168);
+}
+QTabWidget#QRibbonTabWidget QTabBar::tab:selected:hover {
+    background-color: qlineargradient(spread:pad, x1:0, y1:0, x2:0, y2:1, stop:0 rgba(255, 255, 255, 255), stop:0.1 rgba(239, 244, 251, 255), stop:1 rgba(231, 239, 249, 255));
+    border-top-left-radius: 4px;
+    border-top-right-radius: 4px;
+    border-style: solid;
+    border-width: 1px;
+    border-color: rgba(255, 197, 115, 150);
+    border-bottom: 1px solid #E1EAF5;
+}
+QTabWidget#QRibbonTabWidget QTabBar::tab:first {
+    margin-left: 4px;
+}
+QTabWidget#QRibbonTabWidget QTabBar::tab:last {
+    margin-right: 4px;
+}
+QTabWidget#QRibbonTabWidget QGroupBox::title {
+    position: absolute;
+    subcontrol-origin: padding;
+    subcontrol-position: bottom center;
+    min-width: 10000%;
+    max-width: 10000%;
+    border-bottom-left-radius: 3px;
+    border-bottom-right-radius: 3px;
+    border: 1px solid #B6C8D8;
+    border-top-style: none;
+    border-bottom-style: none;
+    color: #4B7CB4;
+    background-color: qlineargradient(x1: 0, y1: 0, x2: 0, y2: 1,stop: 0 #C0D7EF, stop: 1 #BFD7EE);
+}
+QTabWidget#QRibbonTabWidget QGroupBox {
+    background-color: qlineargradient(spread:pad, x1:0, y1:0, x2:0, y2:1, stop:0 rgba(218, 229, 242, 255), stop:0.2 rgba(218, 229, 242, 255), stop:0.201 rgba(198, 215, 236, 255), stop:1 rgba(213, 229, 243, 255));
+    border: 1px solid #B6C8D8;
+    border-radius: 3px;
+}
+QWidget#QRibbonPanelFooter {
+	background-color: #c2d7f2;
+}
+QLabel#QRibbonPanelFooterLabel {
+    color: #4B7CB4;
+}
+QPushButton#sysIconLabel {
+    background-color: rgba(229, 229, 229, 0);
+}
+QPushButton#sysIconLabel:hover {
+    background-color: rgba(229, 229, 229, 0);
+}
+QPushButton#sysIconLabel:pressed {
+    background-color: rgba(202, 202, 202, 0);
+}
+QPushButton#sysIconLabel::menu-indicator{
+    image:none;
+}
